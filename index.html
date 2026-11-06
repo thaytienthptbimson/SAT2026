@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital SAT Bluebook Prep — Lý thuyết, 80 Bài tập Áp dụng &amp; 10 Đề thi thử Chuẩn Format</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;600&amp;family=Merriweather:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- TOP NAVIGATION BAR -->
+  <header class="bg-slate-900 text-white sticky top-0 z-30 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center font-extrabold text-lg tracking-tight shadow-inner">
+          SAT
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="font-bold text-base sm:text-lg tracking-tight">Digital SAT Master Suite</h1>
+            <span class="text-[11px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30">Bluebook 2026</span>
+          </div>
+          <p class="text-xs text-slate-400 hidden sm:block">Phần 1: Lý thuyết &amp; 80 Bài tập (8 chuyên đề × 10 câu) • Phần 2: 10 Đề thi thử chuẩn Format</p>
+        </div>
+      </div>
+
+      <!-- Main Navigation Tabs -->
+      <nav class="flex items-center gap-1.5 bg-slate-800/90 p-1 rounded-xl border border-slate-700" aria-label="Điều hướng chính">
+        <button id="nav-tab-part1" type="button" onclick="switchMainView('part1')" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-blue-600 text-white shadow">
+          1. Ôn tập Lý thuyết &amp; Bài tập (8×10)
+        </button>
+        <button id="nav-tab-part2" type="button" onclick="switchMainView('part2')" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-white hover:bg-slate-700/60">
+          2. 10 Đề thi thử Chuẩn Format
+        </button>
+        <button id="nav-tab-dashboard" type="button" onclick="switchMainView('dashboard')" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all text-slate-300 hover:text-white hover:bg-slate-700/60">
+          Tiến độ &amp; Mã nguồn
+        </button>
+      </nav>
+    </div>
+    <div class="bluebook-border"></div>
+  </header>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 hidden">
+    <div id="toast-box" class="bg-slate-900 text-white px-4 py-3 rounded-xl shadow-xl border border-slate-700 flex items-center gap-3 text-sm font-medium">
+      <span id="toast-msg">Đã lưu tiến độ!</span>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT AREA -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6">
+
+    <!-- =================================================================== -->
+    <!-- VIEW 1: PHẦN 1 — ÔN TẬP LÝ THUYẾT & BÀI TẬP ÁP DỤNG (8 CHUYÊN ĐỀ x 10 BÀI) -->
+    <!-- =================================================================== -->
+    <section id="view-part1" class="space-y-6">
+      <!-- Top Summary Banner -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        <div>
+          <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-2.5 py-1 rounded-md mb-2">
+            Phần 1 • Học phần Cốt lõi Digital SAT
+          </div>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">Ôn tập Lý thuyết &amp; Hệ thống 80 Bài tập Áp dụng</h2>
+          <p class="text-sm text-slate-600 mt-1">
+            Bao gồm đầy đủ <strong>8 nội dung chuẩn College Board</strong> (4 chuyên đề <em>Reading &amp; Writing</em> + 4 chuyên đề <em>Math</em>). Mỗi nội dung tích hợp cẩm nang lý thuyết, chiến thuật tránh bẫy và <strong>đúng 10 bài tập áp dụng</strong> có giải thích từng bước.
+          </p>
+        </div>
+        <div class="flex flex-wrap items-center gap-3 shrink-0">
+          <div class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-center">
+            <div id="p1-stat-completed" class="text-lg font-extrabold text-blue-700 mono-num">0 / 80</div>
+            <div class="text-[11px] font-medium text-slate-500">Bài tập đã làm</div>
+          </div>
+          <div class="bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-2.5 text-center">
+            <div id="p1-stat-correct" class="text-lg font-extrabold text-emerald-700 mono-num">0%</div>
+            <div class="text-[11px] font-medium text-emerald-600">Tỷ lệ chính xác</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Layout: Sidebar Topic Selector + Main Content Area -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <!-- Left Sidebar: 8 Official Domains -->
+        <aside class="lg:col-span-4 space-y-4">
+          <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500">Danh mục 8 Nội dung SAT</h3>
+              <span class="text-xs font-semibold text-blue-600">10 bài / nội dung</span>
+            </div>
+
+            <!-- Section Filter Pills -->
+            <div class="grid grid-cols-3 gap-1.5 bg-slate-100 p-1 rounded-xl mb-3 text-xs font-semibold">
+              <button id="filter-sec-all" type="button" onclick="filterTopicSidebar('all')" class="py-1.5 rounded-lg bg-white text-slate-900 shadow-sm">Tất cả (8)</button>
+              <button id="filter-sec-rw" type="button" onclick="filterTopicSidebar('Reading & Writing')" class="py-1.5 rounded-lg text-slate-600 hover:text-slate-900">R&amp;W (4)</button>
+              <button id="filter-sec-math" type="button" onclick="filterTopicSidebar('Math')" class="py-1.5 rounded-lg text-slate-600 hover:text-slate-900">Math (4)</button>
+            </div>
+
+            <div id="topic-sidebar-list" class="space-y-2">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </aside>
+
+        <!-- Right Detail Panel: Theory & 10 Applied Exercises -->
+        <div class="lg:col-span-8 space-y-5">
+          <!-- Topic Header & Sub-tab Switcher (Lý thuyết vs 10 Bài tập áp dụng) -->
+          <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+              <div class="flex items-center gap-2">
+                <span id="active-topic-badge" class="text-xs font-bold px-2.5 py-1 rounded-md bg-blue-100 text-blue-800">RW-01</span>
+                <span id="active-topic-weight" class="text-xs font-medium text-slate-500">26% phần Reading &amp; Writing</span>
+              </div>
+              <button type="button" onclick="resetCurrentTopicProgress()" class="text-xs font-semibold text-rose-600 hover:text-rose-700 hover:underline">
+                Làm lại 10 bài chuyên đề này
+              </button>
+            </div>
+
+            <h3 id="active-topic-title" class="text-xl font-extrabold text-slate-900">Information and Ideas</h3>
+            <p id="active-topic-summary" class="text-sm text-slate-600 mt-1"></p>
+
+            <!-- Sub-mode Toggle: Theory vs 10 Exercises -->
+            <div class="mt-4 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+              <div class="inline-flex rounded-xl bg-slate-100 p-1">
+                <button id="subtab-theory" type="button" onclick="switchTopicMode('theory')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-bold bg-white text-blue-700 shadow-sm transition-all">
+                  📖 A. Ôn tập Lý thuyết &amp; Phương pháp
+                </button>
+                <button id="subtab-exercises" type="button" onclick="switchTopicMode('exercises')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-bold text-slate-600 hover:text-slate-900 transition-all">
+                  ✍️ B. 10 Bài tập Áp dụng (<span id="active-topic-q-progress">0/10</span>)
+                </button>
+              </div>
+              <div class="text-xs text-slate-500">
+                Đúng: <strong id="active-topic-score-text" class="text-emerald-700">0/10</strong> câu
+              </div>
+            </div>
+          </div>
+
+          <!-- SUBVIEW 1A: THEORY CONTENT -->
+          <div id="topic-theory-panel" class="space-y-4">
+            <!-- Populated by JS -->
+          </div>
+
+          <!-- SUBVIEW 1B: 10 APPLIED EXERCISES -->
+          <div id="topic-exercises-panel" class="hidden space-y-4">
+            <!-- Quick Question Jump Bar (1..10) -->
+            <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Danh sách 10 bài tập áp dụng</span>
+                <div class="flex items-center gap-2">
+                  <button type="button" onclick="checkAllTopicExercises()" class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-200">
+                    Hiện đáp án cả 10 câu
+                  </button>
+                </div>
+              </div>
+              <div id="topic-exercise-pills" class="flex flex-wrap gap-2">
+                <!-- 1..10 pills -->
+              </div>
+            </div>
+
+            <!-- List of 10 Exercise Cards -->
+            <div id="topic-exercises-list" class="space-y-4">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- VIEW 2: PHẦN 2 — 10 ĐỀ THI THỬ CHUẨN FORMAT DIGITAL SAT (BLUEBOOK)  -->
+    <!-- =================================================================== -->
+    <section id="view-part2" class="hidden space-y-6">
+
+      <!-- STATE A: EXAM CATALOG (10 MOCK EXAMS) -->
+      <div id="exam-catalog-view" class="space-y-6">
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div>
+            <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-md mb-2">
+              Phần 2 • Phòng thi giả lập Bluebook Digital SAT
+            </div>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">Hệ thống 10 Đề thi thử Chuẩn Format Digital SAT</h2>
+            <p class="text-sm text-slate-600 mt-1">
+              Mỗi đề thi gồm <strong>2 Phần (Reading &amp; Writing + Math)</strong> chia làm <strong>4 Module Adaptive</strong> với đồng hồ đếm ngược, bảng công thức Toán SAT, máy tính khoa học, công cụ gạch đáp án nhiễu (Option Eliminator) và quy đổi điểm chuẩn thang <strong>400–1600</strong>.
+            </p>
+          </div>
+          <div class="flex items-center gap-3 shrink-0">
+            <div class="bg-indigo-50 border border-indigo-200 rounded-xl px-4 py-2.5 text-center">
+              <div id="p2-stat-exams-done" class="text-lg font-extrabold text-indigo-700 mono-num">0 / 10</div>
+              <div class="text-[11px] font-medium text-indigo-600">Đề đã hoàn thành</div>
+            </div>
+            <div class="bg-amber-50 border border-amber-200 rounded-xl px-4 py-2.5 text-center">
+              <div id="p2-stat-best-score" class="text-lg font-extrabold text-amber-800 mono-num">—</div>
+              <div class="text-[11px] font-medium text-amber-700">Điểm cao nhất (400–1600)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grid of 10 Mock Exams -->
+        <div id="exam-cards-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- STATE B: ACTIVE BLUEBOOK EXAM RUNNER -->
+      <div id="exam-runner-view" class="hidden space-y-4">
+        <!-- Bluebook Top Bar -->
+        <div class="bg-slate-900 text-white rounded-2xl p-4 shadow-lg border border-slate-800">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <!-- Left: Section & Module Title + Directions -->
+            <div>
+              <div class="flex items-center gap-2">
+                <span id="bb-exam-badge" class="text-[11px] font-bold uppercase px-2 py-0.5 rounded bg-blue-600 text-white">Đề #1</span>
+                <h3 id="bb-module-title" class="font-bold text-sm sm:text-base">Section 1, Module 1: Reading and Writing</h3>
+              </div>
+              <div class="flex items-center gap-3 mt-1">
+                <button type="button" onclick="toggleDirectionsModal()" class="text-xs text-slate-300 hover:text-white underline flex items-center gap-1">
+                  <span>Directions (Hướng dẫn làm bài)</span>
+                </button>
+                <span class="text-slate-600">•</span>
+                <button type="button" onclick="exitExamToCatalog()" class="text-xs text-rose-300 hover:text-rose-200 underline">
+                  Thoát &amp; Lưu tạm
+                </button>
+              </div>
+            </div>
+
+            <!-- Center: Countdown Timer -->
+            <div class="flex items-center gap-2 bg-slate-800 px-3.5 py-1.5 rounded-xl border border-slate-700">
+              <div class="text-center">
+                <div id="bb-timer-display" class="text-lg font-extrabold mono-num tracking-wider text-amber-300">32:00</div>
+                <div class="text-[10px] uppercase tracking-wider text-slate-400">Thời gian Module</div>
+              </div>
+              <div class="flex flex-col gap-1 pl-2 border-l border-slate-700">
+                <button id="bb-timer-pause-btn" type="button" onclick="toggleExamTimerPause()" class="text-[11px] px-2 py-0.5 rounded bg-slate-700 hover:bg-slate-600 text-slate-200">
+                  Tạm dừng
+                </button>
+                <button type="button" onclick="toggleExamTimerVisibility()" class="text-[11px] px-2 py-0.5 rounded bg-slate-700 hover:bg-slate-600 text-slate-200">
+                  Ẩn/Hiện
+                </button>
+              </div>
+            </div>
+
+            <!-- Right: Bluebook Tools (Calculator, Reference Sheet, Eliminator) -->
+            <div class="flex flex-wrap items-center gap-2">
+              <button type="button" onclick="toggleCalculatorModal()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-semibold flex items-center gap-1.5">
+                <span>🧮 Máy tính &amp; Nháp</span>
+              </button>
+              <button type="button" onclick="toggleReferenceModal()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-semibold flex items-center gap-1.5">
+                <span>📐 Công thức SAT</span>
+              </button>
+              <button id="bb-eliminator-btn" type="button" onclick="toggleEliminatorMode()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-semibold flex items-center gap-1.5">
+                <span><s>ABC</s> Loại trừ</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Module Switcher Tabs (4 Modules) -->
+          <div id="bb-module-tabs" class="mt-3 pt-3 border-t border-slate-800 grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- Directions Collapsible Banner -->
+        <div id="bb-directions-box" class="hidden bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs sm:text-sm text-amber-950 flex items-start justify-between gap-4">
+          <div>
+            <strong class="font-bold block mb-1">Directions (Hướng dẫn chuẩn Bluebook):</strong>
+            <p id="bb-directions-text"></p>
+          </div>
+          <button type="button" onclick="toggleDirectionsModal()" class="text-xs font-bold text-amber-800 hover:underline shrink-0">Đóng ✕</button>
+        </div>
+
+        <!-- Split Screen Workspace: Left (Passage/Stimulus) | Right (Question & Choices) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden min-h-[440px]">
+          <!-- Left Pane: Passage / Stimulus / Equations -->
+          <div class="lg:col-span-6 p-5 sm:p-6 border-b lg:border-b-0 lg:border-r border-slate-200 bg-slate-50/50 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between text-xs text-slate-500 mb-3 pb-2 border-b border-slate-200">
+                <span id="bb-q-domain-label" class="font-semibold text-slate-700">Information and Ideas • Inferences</span>
+                <span class="mono-num">Bluebook Standard View</span>
+              </div>
+              <div id="bb-q-passage" class="serif-passage text-sm sm:text-base text-slate-800 whitespace-pre-line"></div>
+            </div>
+            <div class="mt-6 pt-3 border-t border-slate-200/70 text-[11px] text-slate-400 flex items-center justify-between">
+              <span>Mẹo: Bấm nút <s>ABC</s> để gạch bỏ các phương án nhiễu.</span>
+              <span id="bb-q-section-tag" class="font-semibold text-slate-500">Reading &amp; Writing</span>
+            </div>
+          </div>
+
+          <!-- Right Pane: Question Number, Flag, Stem & 4 Options -->
+          <div class="lg:col-span-6 p-5 sm:p-6 flex flex-col justify-between">
+            <div>
+              <!-- Question Top Header -->
+              <div class="flex items-center justify-between bg-slate-100 rounded-xl px-3.5 py-2 mb-4">
+                <div class="flex items-center gap-2.5">
+                  <span id="bb-q-number-badge" class="w-7 h-7 rounded-lg bg-slate-900 text-white font-bold text-xs flex items-center justify-center mono-num">1</span>
+                  <button id="bb-flag-btn" type="button" onclick="toggleFlagCurrentExamQuestion()" class="text-xs font-semibold px-2.5 py-1 rounded-md border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 flex items-center gap-1.5 transition-all">
+                    <span id="bb-flag-icon">🔖</span>
+                    <span id="bb-flag-text">Mark for Review</span>
+                  </button>
+                </div>
+                <span id="bb-eliminator-status" class="text-[11px] font-semibold text-slate-500">Chế độ gạch đáp án: Tắt</span>
+              </div>
+
+              <!-- Question Stem -->
+              <h4 id="bb-q-stem" class="font-semibold text-slate-900 text-sm sm:text-base mb-4"></h4>
+
+              <!-- Options Container -->
+              <div id="bb-q-options" class="space-y-2.5">
+                <!-- Populated by JS -->
+              </div>
+
+              <!-- Post-submission Explanation Box (shown in Review Mode) -->
+              <div id="bb-q-explanation-box" class="hidden mt-4 p-4 rounded-xl bg-blue-50 border border-blue-200 text-xs sm:text-sm text-slate-800">
+                <div class="font-bold text-blue-900 mb-1">💡 Giải thích chi tiết (Answer Key):</div>
+                <p id="bb-q-explanation-text"></p>
+              </div>
+            </div>
+
+            <!-- Question Bottom Quick Bar -->
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between gap-2">
+              <button id="bb-prev-btn" type="button" onclick="navigateExamQuestion(-1)" class="px-4 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm font-bold text-slate-700 hover:bg-slate-100">
+                ← Câu trước
+              </button>
+              <div id="bb-question-palette" class="flex flex-wrap items-center justify-center gap-1.5">
+                <!-- Number buttons 1..5 in current module -->
+              </div>
+              <button id="bb-next-btn" type="button" onclick="navigateExamQuestion(1)" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-bold shadow-sm">
+                Câu tiếp →
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Action Bar: Submit Exam or Module Navigation -->
+        <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm flex flex-wrap items-center justify-between gap-3">
+          <div class="text-xs sm:text-sm text-slate-600">
+            Tiến độ đề thi hiện tại: <strong id="bb-total-answered-count" class="text-slate-900">0 / 20</strong> câu đã chọn đáp án • <strong id="bb-total-flagged-count" class="text-amber-700">0</strong> câu đánh dấu xem lại
+          </div>
+          <div class="flex items-center gap-2.5">
+            <button id="bb-next-module-btn" type="button" onclick="goToNextExamModule()" class="px-4 py-2 rounded-xl border border-indigo-200 bg-indigo-50 text-indigo-700 hover:bg-indigo-100 text-xs sm:text-sm font-bold">
+              Chuyển sang Module tiếp theo →
+            </button>
+            <button id="bb-submit-exam-btn" type="button" onclick="submitCurrentExam()" class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold shadow">
+              ✓ Nộp bài &amp; Chấm điểm (Thang 1600)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATE C: EXAM SCORE REPORT & REVIEW -->
+      <div id="exam-result-view" class="hidden space-y-6">
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+          <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-slate-200">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-emerald-100 text-emerald-800">Score Report • Kết quả Thi thử Digital SAT</span>
+              <h3 id="res-exam-title" class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-2">Đề thi thử Digital SAT #1</h3>
+              <p class="text-sm text-slate-500">Bảng điểm quy đổi theo thang chuẩn College Board (400–1600)</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+              <button type="button" onclick="reviewExamInBluebook()" class="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-bold shadow-sm">
+                🔍 Xem lại từng câu trong giao diện Bluebook
+              </button>
+              <button type="button" onclick="retakeCurrentExam()" class="px-4 py-2.5 rounded-xl border border-slate-300 hover:bg-slate-100 text-slate-700 text-xs sm:text-sm font-bold">
+                ↻ Làm lại đề này
+              </button>
+              <button type="button" onclick="exitExamToCatalog()" class="px-4 py-2.5 rounded-xl border border-slate-300 hover:bg-slate-100 text-slate-700 text-xs sm:text-sm font-bold">
+                ← Danh sách 10 đề
+              </button>
+            </div>
+          </div>
+
+          <!-- 3 Score Cards: Total (400-1600), R&W (200-800), Math (200-800) -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+            <div class="bg-slate-900 text-white rounded-2xl p-5 text-center shadow">
+              <div class="text-xs font-semibold uppercase tracking-wider text-slate-400">Total Scaled Score</div>
+              <div id="res-total-scaled" class="text-4xl sm:text-5xl font-extrabold text-amber-400 mono-num my-2">1520</div>
+              <div class="text-xs text-slate-300">Thang điểm 400 – 1600</div>
+            </div>
+            <div class="bg-blue-50 border border-blue-200 rounded-2xl p-5 text-center">
+              <div class="text-xs font-bold uppercase tracking-wider text-blue-700">Section 1: Reading &amp; Writing</div>
+              <div id="res-rw-scaled" class="text-3xl sm:text-4xl font-extrabold text-blue-900 mono-num my-2">750</div>
+              <div id="res-rw-raw" class="text-xs font-semibold text-blue-700">Đúng 9 / 10 câu (200–800)</div>
+            </div>
+            <div class="bg-indigo-50 border border-indigo-200 rounded-2xl p-5 text-center">
+              <div class="text-xs font-bold uppercase tracking-wider text-indigo-700">Section 2: Math</div>
+              <div id="res-math-scaled" class="text-3xl sm:text-4xl font-extrabold text-indigo-900 mono-num my-2">770</div>
+              <div id="res-math-raw" class="text-xs font-semibold text-indigo-700">Đúng 10 / 10 câu (200–800)</div>
+            </div>
+          </div>
+
+          <!-- Detailed Question-by-Question Review Table -->
+          <div class="mt-6">
+            <h4 class="font-bold text-slate-900 text-base mb-3">Bảng đối chiếu Đáp án &amp; Giải thích chi tiết toàn đề</h4>
+            <div id="res-questions-breakdown" class="space-y-3">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- VIEW 3: TIẾN ĐỘ HỌC TẬP & TRÌNH XEM MÃ NGUỒN (DASHBOARD & SOURCE)    -->
+    <!-- =================================================================== -->
+    <section id="view-dashboard" class="hidden space-y-6">
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+          <div>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">Tổng quan Hồ sơ Học tập &amp; Kiến trúc Mã nguồn</h2>
+            <p class="text-sm text-slate-600 mt-1">Theo dõi kết quả hoàn thành 80 bài tập áp dụng ở Phần 1 và 10 đề thi thử ở Phần 2.</p>
+          </div>
+          <button type="button" onclick="resetAllAppData()" class="px-4 py-2 rounded-xl border border-rose-200 bg-rose-50 text-rose-700 hover:bg-rose-100 text-xs font-bold">
+            Xóa toàn bộ dữ liệu làm bài
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <div class="text-xs font-semibold text-slate-500">Chuyên đề Lý thuyết</div>
+            <div class="text-2xl font-extrabold text-slate-900 mt-1 mono-num">8 / 8</div>
+            <div class="text-xs text-slate-500 mt-1">4 Reading &amp; Writing • 4 Math</div>
+          </div>
+          <div class="p-4 rounded-xl bg-blue-50 border border-blue-200">
+            <div class="text-xs font-semibold text-blue-700">Bài tập Áp dụng (Phần 1)</div>
+            <div id="dash-p1-count" class="text-2xl font-extrabold text-blue-900 mt-1 mono-num">0 / 80</div>
+            <div id="dash-p1-acc" class="text-xs text-blue-700 mt-1">10 bài tập / nội dung</div>
+          </div>
+          <div class="p-4 rounded-xl bg-indigo-50 border border-indigo-200">
+            <div class="text-xs font-semibold text-indigo-700">Đề thi thử hoàn thành (Phần 2)</div>
+            <div id="dash-p2-count" class="text-2xl font-extrabold text-indigo-900 mt-1 mono-num">0 / 10</div>
+            <div class="text-xs text-indigo-700 mt-1">4 Module Adaptive / đề</div>
+          </div>
+          <div class="p-4 rounded-xl bg-amber-50 border border-amber-200">
+            <div class="text-xs font-semibold text-amber-800">Điểm SAT Dự kiến Cao nhất</div>
+            <div id="dash-best-sat" class="text-2xl font-extrabold text-amber-900 mt-1 mono-num">—</div>
+            <div class="text-xs text-amber-700 mt-1">Thang chuẩn 400–1600</div>
+          </div>
+        </div>
+
+        <!-- Source Code Export & Architecture Summary -->
+        <div class="border-t border-slate-200 pt-6">
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+            <div>
+              <h3 class="font-bold text-slate-900 text-base">Mã nguồn Ứng dụng (Self-Contained HTML5 + Tailwind CSS + Vanilla JS)</h3>
+              <p class="text-xs text-slate-500">Bạn có thể sao chép toàn bộ mã nguồn HTML bên dưới hoặc chuyển sang thẻ <strong>Code</strong> của Canvas để tải về máy.</p>
+            </div>
+            <button type="button" onclick="copyFullSourceCode()" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold shadow-sm">
+              📋 Sao chép toàn bộ Mã nguồn HTML
+            </button>
+          </div>
+          <textarea id="source-code-viewer" readonly class="w-full h-64 p-4 rounded-xl bg-slate-950 text-emerald-300 mono-num text-xs border border-slate-800 focus:outline-none" aria-label="Mã nguồn HTML của ứng dụng"></textarea>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =================================================================== -->
+  <!-- MODAL 1: OFFICIAL SAT MATH REFERENCE SHEET                          -->
+  <!-- =================================================================== -->
+  <div id="modal-reference" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-40 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[88vh] overflow-y-auto shadow-2xl border border-slate-200 p-6">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-200 mb-4">
+        <div>
+          <h3 class="font-extrabold text-lg text-slate-900">📐 Bảng Công thức Toán Digital SAT (Official Reference Sheet)</h3>
+          <p class="text-xs text-slate-500">Cung cấp sẵn trong mọi Module Toán trên ứng dụng Bluebook</p>
+        </div>
+        <button type="button" onclick="toggleReferenceModal()" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-700">Đóng ✕</button>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
+          <div class="font-bold text-slate-900">1. Đường tròn (Circle)</div>
+          <div>• Diện tích: <code class="mono-num font-semibold text-blue-700">A = πr²</code></div>
+          <div>• Chu vi: <code class="mono-num font-semibold text-blue-700">C = 2πr</code></div>
+          <div>• Một vòng tròn = <code class="mono-num">360°</code> = <code class="mono-num">2π radians</code></div>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
+          <div class="font-bold text-slate-900">2. Hình chữ nhật &amp; Tam giác</div>
+          <div>• Hình chữ nhật: <code class="mono-num font-semibold text-blue-700">A = l · w</code></div>
+          <div>• Tam giác: <code class="mono-num font-semibold text-blue-700">A = ½ b · h</code></div>
+          <div>• Định lý Pythagoras: <code class="mono-num font-semibold text-blue-700">c² = a² + b²</code></div>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
+          <div class="font-bold text-slate-900">3. Tam giác vuông đặc biệt</div>
+          <div>• <strong>30°–60°–90°:</strong> Tỷ lệ ba cạnh đối diện là <code class="mono-num font-semibold text-indigo-700">x : x√3 : 2x</code></div>
+          <div>• <strong>45°–45°–90°:</strong> Tỷ lệ ba cạnh đối diện là <code class="mono-num font-semibold text-indigo-700">s : s : s√2</code></div>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
+          <div class="font-bold text-slate-900">4. Thể tích Khối 3D (Volumes)</div>
+          <div>• Hộp chữ nhật: <code class="mono-num font-semibold text-blue-700">V = l · w · h</code></div>
+          <div>• Hình trụ (Cylinder): <code class="mono-num font-semibold text-blue-700">V = πr²h</code></div>
+          <div>• Hình cầu (Sphere): <code class="mono-num font-semibold text-blue-700">V = (4/3)πr³</code></div>
+          <div>• Hình nón (Cone): <code class="mono-num font-semibold text-blue-700">V = (1/3)πr²h</code></div>
+          <div>• Hình chóp (Pyramid): <code class="mono-num font-semibold text-blue-700">V = (1/3)lwh</code></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================================================================== -->
+  <!-- MODAL 2: SCIENTIFIC CALCULATOR & SCRATCHPAD                         -->
+  <!-- =================================================================== -->
+  <div id="modal-calculator" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-40 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-2xl w-full shadow-2xl border border-slate-200 p-6">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-200 mb-4">
+        <div>
+          <h3 class="font-extrabold text-lg text-slate-900">🧮 Máy tính Khoa học &amp; Bảng nháp SAT</h3>
+          <p class="text-xs text-slate-500">Hỗ trợ tính biểu thức toán học, nghiệm phương trình bậc hai và ghi chú nháp</p>
+        </div>
+        <button type="button" onclick="toggleCalculatorModal()" class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-700">Đóng ✕</button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Expression Calculator -->
+        <div class="space-y-3">
+          <label for="calc-input" class="block text-xs font-bold uppercase text-slate-500">Biểu thức tính toán</label>
+          <input id="calc-input" type="text" placeholder="Ví dụ: (20*82 + 30*87)/50 hoặc Math.sqrt(289)" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 mono-num text-sm focus:outline-none focus:border-blue-600" />
+          <div class="grid grid-cols-4 gap-1.5">
+            <button type="button" onclick="appendCalc('7')" class="py-2 rounded-lg bg-slate-100 hover:bg-slate-200 font-bold text-sm mono-num">7</button>
+            <button type="button" onclick="appendCalc('8')" class="py-2 rounded-lg bg-slate-100 hover:bg-slate-200 font-bold text-sm mono-num">8</button>
+            <button type="button" onclick="appendCalc('9')" class="py-2 rounded-lg bg-slate-100 hover:bg-slate-200 font-bold text-sm mono-num">9</button>
+            <button type="button" onclick="appendCalc('/')" class="py-2 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold text-sm mono-num">÷</button>
+            <button type="button" onclick="appendCalc('4')" class="py-2 rounded-lg bg-slate-100 hover:bg-slate-200 font-bold text-sm mono-num">4</button>
+            <button type="button" onclick="appendCalc('5')" class="py-2 rounded-lg bg-slate-100 hover:bg-slate-200 font-bold text-sm mono-num">5</button>
+            <button type="button" onclick="appendCalc('6')" class="py-2 rounded-lg bg-slate-100 hover:bg-slate-200 font-bold text-sm mono-num">6</button>
+            <button type="button" onclick="appendCalc('*')" class="py-2 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold text-sm mono-num">×</button>
+            <button type="button" onclick="appendCalc('1')" class="py-2 rounded-lg bg-slate-100 hover:bg-slate-200 font-bold text-sm mono-num">1</button>
+            <button type="button" onclick="appendCalc('2')" class="py-2 rounded-lg bg-slate-100 hover:bg-slate-200 font-bold text-sm mono-num">2</button>
+            <button type="button" onclick="appendCalc('3')" class="py-2 rounded-lg bg-slate-100 hover:bg-slate-200 font-bold text-sm mono-num">3</button>
+            <button type="button" onclick="appendCalc('-')" class="py-2 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold text-sm mono-num">−</button>
+            <button type="button" onclick="appendCalc('0')" class="py-2 rounded-lg bg-slate-100 hover:bg-slate-200 font-bold text-sm mono-num">0</button>
+            <button type="button" onclick="appendCalc('.')" class="py-2 rounded-lg bg-slate-100 hover:bg-slate-200 font-bold text-sm mono-num">.</button>
+            <button type="button" onclick="clearCalcInput()" class="py-2 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold text-xs">AC</button>
+            <button type="button" onclick="appendCalc('+')" class="py-2 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold text-sm mono-num">+</button>
+          </div>
+          <div class="flex items-center gap-2">
+            <button type="button" onclick="evaluateCalc()" class="flex-1 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm">Tính kết quả (=)</button>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-900 text-emerald-400 mono-num text-sm">
+            Kết quả: <strong id="calc-result-text">0</strong>
+          </div>
+        </div>
+
+        <!-- Scratchpad -->
+        <div class="space-y-2 flex flex-col">
+          <label for="scratchpad-area" class="block text-xs font-bold uppercase text-slate-500">Giấy nháp phòng thi (Tự động lưu)</label>
+          <textarea id="scratchpad-area" placeholder="Ghi chú công thức, hệ phương trình hoặc tóm tắt luận điểm bài đọc tại đây..." class="flex-1 min-h-[210px] w-full p-3 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:border-blue-600"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================================================================== -->
+  <!-- APPLICATION LOGIC & EMBEDDED DATA                                   -->
+  <!-- =================================================================== -->
+    <script src="./js/data.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
